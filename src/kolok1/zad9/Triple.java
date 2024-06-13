@@ -1,4 +1,4 @@
-package kolok1.zad9;
+package zad9;
 
 import java.util.ArrayList;
 import java.util.Comparator;
