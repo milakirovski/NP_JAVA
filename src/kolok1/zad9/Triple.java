@@ -3,6 +3,7 @@ package zad9;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class Triple<T extends Number> {
@@ -44,7 +45,7 @@ public class Triple<T extends Number> {
 
     @Override
     public String toString() {
-        return String.format("%.2f %.2f %.2f", list.get(0).doubleValue(), list.get(1).doubleValue(), list.get(2).doubleValue());
+        return String.format(Locale.US,"%.2f %.2f %.2f", list.get(0).doubleValue(), list.get(1).doubleValue(), list.get(2).doubleValue());
     }
 
 }
