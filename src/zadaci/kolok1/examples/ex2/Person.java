@@ -1,7 +1,6 @@
 package kolok1.examples.ex2;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class Person implements Comparable<Person>{
     private String name;

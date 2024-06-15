@@ -1,4 +1,4 @@
-package zad9;
+package kolok1.zad9;
 
 import java.util.Locale;
 import java.util.Scanner;

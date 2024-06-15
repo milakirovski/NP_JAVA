@@ -1,7 +1,5 @@
 package kolok1.examples.ex1;
 
-import kolok1.examples.ex1.Counter;
-
 import java.io.*;
 
 public class WordCountTest {

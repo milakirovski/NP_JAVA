@@ -2,7 +2,6 @@ package kolok1.zad2;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Canvas implements Comparable<Canvas>{
 

@@ -1,4 +1,4 @@
-package zad12;
+package kolok1.zad12;
 
 import java.util.Scanner;
 

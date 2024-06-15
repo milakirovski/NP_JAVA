@@ -1,4 +1,4 @@
-package zad10;
+package kolok1.zad10;
 
 import java.util.Arrays;
 import java.util.Scanner;
