@@ -1,4 +1,4 @@
-package auditoriski.aud5_Generic;
+package auditoriski.aud5_Generic.Box;
 
 import java.util.stream.IntStream;
 
