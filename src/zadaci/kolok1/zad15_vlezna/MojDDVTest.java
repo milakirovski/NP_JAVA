@@ -4,10 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-class AmountNotAllowedException extends Exception{
-    AmountNotAllowedException(int sum){
-        super(String.format("Receipt with amount %d is not allowed to be scanned",sum));
+class AmountNotAllowedException extends Exception {
+    AmountNotAllowedException(int sum) {
+        super(String.format("Receipt with amount %d is not allowed to be scanned", sum));
     }
 }
 
@@ -18,20 +20,14 @@ public class MojDDVTest {
         MojDDV mojDDV = new MojDDV();
 
         System.out.println("===READING RECORDS FROM INPUT STREAM===");
-        try {
-            mojDDV.readRecords(System.in);
-        } catch (AmountNotAllowedException e) {
-            System.out.println(e.getMessage());
-        }
+        mojDDV.readRecords(System.in);
 
         System.out.println("===PRINTING TAX RETURNS RECORDS TO OUTPUT STREAM ===");
         mojDDV.printTaxReturns(System.out);
-
-
     }
 }
 
-class MojDDV{
+class MojDDV {
 
     private List<Fiskalna> fiskalni;
 
@@ -39,38 +35,39 @@ class MojDDV{
         this.fiskalni = new ArrayList<>();
     }
 
-    public void readRecords (InputStream inputStream) throws IOException, AmountNotAllowedException {
+    public void readRecords(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-       reader.lines()
+        fiskalni = reader.lines()
                 .map(i -> {
-                    try{
-                       return Fiskalna.of(i);
-                    }catch (AmountNotAllowedException e){
+                    try {
+                        return Fiskalna.of(i);
+                    } catch (AmountNotAllowedException e) {
                         System.out.println(e.getMessage());
                         return null;
                     }
                 })
-               .filter(i -> i != null)
-               .forEach(i -> fiskalni.add(i));
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
     }
 
-    public void printTaxReturns (OutputStream outputStream) throws IOException {
+    public void printTaxReturns(OutputStream outputStream) throws IOException {
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream));
 
-        for (Fiskalna fiskalna : fiskalni) {
-            writer.println(fiskalna);
+        fiskalni.forEach(i -> {
+            writer.println(i);
             writer.flush();
-        }
+        });
+
     }
 }
 
-interface TaxReturn{
+interface TaxReturn {
     double getTax();
 }
 
-class Item implements TaxReturn{
+class Item implements TaxReturn {
     private int price;
     private String taxType;
 
@@ -86,15 +83,15 @@ class Item implements TaxReturn{
 
     @Override
     public double getTax() {
-        switch(taxType){
-            case "A": return (price * 0.18) * 0.15;
-            case "B": return (price * 0.05) * 0.15;
+        switch (taxType) {
+            case "A" : return  (price * 0.18) * 0.15;
+            case "B" : return  (price * 0.05) * 0.15;
         }
-        return 0 ;
+        return 0;
     }
 }
 
-class Fiskalna{
+class Fiskalna {
     private long id;
     private List<Item> items;
 
@@ -112,31 +109,33 @@ class Fiskalna{
         long id = Long.parseLong(lineParts[0]);
         List<Item> items = new ArrayList<>();
 
-        for (int i = 1; i < lineParts.length; i+=2){
-            items.add(new Item(Integer.parseInt(lineParts[i]),lineParts[i+1]));
+        for (int i = 1; i < lineParts.length; i += 2) {
+            items.add(new Item(Integer.parseInt(lineParts[i]), lineParts[i + 1]));
         }
 
-        if(sumOfPricesPerFiskalna(items) > 30000)
-            throw new AmountNotAllowedException(sumOfPricesPerFiskalna(items));
+        int sum = sumOfPricesPerFiskalna(items);
 
-        return new Fiskalna(id,items);
+        if (sum > 30000)
+            throw new AmountNotAllowedException(sum);
+
+        return new Fiskalna(id, items);
     }
 
-    public static int sumOfPricesPerFiskalna(List<Item> items){
+    public static int sumOfPricesPerFiskalna(List<Item> items) {
         return items.stream()
-                .mapToInt(i -> i.getPrice())
+                .mapToInt(Item::getPrice)
                 .sum();
     }
 
-    private static double sumOfTaxesPerFiskalna(List<Item> items){
+    private static double sumOfTaxesPerFiskalna(List<Item> items) {
         return items.stream()
-                .mapToDouble(i -> i.getTax())
+                .mapToDouble(Item::getTax)
                 .sum();
     }
 
     @Override
     public String toString() {
-        return String.format(Locale.US,"%d %d %.2f",id, sumOfPricesPerFiskalna(items),sumOfTaxesPerFiskalna(items));
+        return String.format(Locale.US, "%d %d %.2f", id, sumOfPricesPerFiskalna(items), sumOfTaxesPerFiskalna(items));
     }
 }
 
