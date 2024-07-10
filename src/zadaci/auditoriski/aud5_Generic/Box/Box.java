@@ -10,7 +10,7 @@ import java.util.Random;
  * V - value
  * K - key
  */
-public class Box <E extends Drawable<E>>{
+public class Box<E extends Drawable<E>> {
     private final List<E> elements;
     private static final Random random = new Random();
 
@@ -23,15 +23,15 @@ public class Box <E extends Drawable<E>>{
         elements.add(element);
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return elements.isEmpty();
     }
 
-    public E draw(){
-        if (elements.isEmpty()){
+    public E draw() {
+        if (elements.isEmpty()) {
             return null;
         }
-       return elements.remove(random.nextInt(elements.size()));
+        return elements.remove(random.nextInt(elements.size()));
     }
 
     @Override
