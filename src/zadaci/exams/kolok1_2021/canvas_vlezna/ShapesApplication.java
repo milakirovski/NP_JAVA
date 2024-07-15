@@ -27,9 +27,7 @@ public class ShapesApplication {
         PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
 
         Canvas maxParametarCanvas = canvasList.stream()
-                .sorted()
-                .collect(Collectors.toCollection(ArrayList::new))
-                .getLast();
+                        .max(Comparator.naturalOrder()).orElse(null);
 
         pw.println(maxParametarCanvas);
         pw.flush();

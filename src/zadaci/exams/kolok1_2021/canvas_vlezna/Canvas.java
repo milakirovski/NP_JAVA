@@ -1,7 +1,9 @@
 package exams.kolok1_2021.canvas_vlezna;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Canvas implements  Comparable<Canvas>{
     private String id;
@@ -21,9 +23,10 @@ public class Canvas implements  Comparable<Canvas>{
         String id = parts[0];
         List<Square> squares = new ArrayList<>();
 
-        for(int i = 1; i < parts.length; i++){
-            squares.add(new Square(Integer.parseInt(parts[i])));
-        }
+        squares = Arrays.stream(parts).skip(1)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(Square::new)
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return new Canvas(id, squares);
     }
@@ -36,7 +39,7 @@ public class Canvas implements  Comparable<Canvas>{
     @Override
     public String toString() {
         //canvas_id squares_count total_squares_perimeter
-        return id + " " + countSquaresPerCanvas() + " " + totalCanvasSquaresParameter();
+        return String.format("%s %d %d", id, countSquaresPerCanvas(), totalCanvasSquaresParameter());
     }
 
     @Override
