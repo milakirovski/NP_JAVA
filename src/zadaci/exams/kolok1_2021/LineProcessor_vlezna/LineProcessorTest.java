@@ -1,43 +1,49 @@
-package aud6_1;
+package exams.kolok1_2021.LineProcessor_vlezna;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-class LineProcessor {
+class LineProcessor{
 
     List<String> lines;
 
     public LineProcessor() {
-        lines = new ArrayList<>();
+        this.lines = new ArrayList<>();
     }
 
-    private int countOcc(String line, char c) {
-        return (int) line.toLowerCase()
-                .chars().filter(i -> ((char) i == c))
+    public void readLines(InputStream in, PrintStream out, char a) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+
+        lines = br.lines().collect(Collectors.toList());
+
+        String maxString = "";
+        int currMax = 0;
+        for (String line : lines){
+            if(countCharacterOccurrences(line,a) >= currMax){
+                currMax = countCharacterOccurrences(line,a);
+                maxString = line;
+            }
+        }
+
+        pw.println(maxString);
+        pw.flush();
+        pw.close();
+
+    }
+
+    public int countCharacterOccurrences(String line, char a){
+        return (int) line.chars()
+                .map(i -> (char) i)
+                .map(Character::toLowerCase)
+                .filter(i -> i == a)
                 .count();
     }
 
 
-    public void readLines(InputStream in, OutputStream out, char c) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
-        lines = br.lines().collect(Collectors.toList());
-
-        Comparator<String> comparator = Comparator.comparing(str -> countOcc(str,c));
-
-        String max = lines.stream()
-                .max(comparator.thenComparing(Comparator.naturalOrder()))
-                .orElse("");
-
-
-        PrintWriter pw = new PrintWriter(out);
-        pw.println(max);
-        pw.flush();
-    }
 }
 
 public class LineProcessorTest {
