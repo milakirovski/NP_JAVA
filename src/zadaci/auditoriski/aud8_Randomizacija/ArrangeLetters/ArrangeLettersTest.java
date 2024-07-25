@@ -1,4 +1,4 @@
-package auditoriski.aud7_Randomizacija.ArrangeLetters;
+package auditoriski.aud8_Randomizacija.ArrangeLetters;
 
 import java.util.Arrays;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package auditoriski.aud7_Randomizacija.BenfordsLaw;
+package auditoriski.aud8_Randomizacija.BenfordsLaw;
 
 import java.io.*;
 import java.util.ArrayList;

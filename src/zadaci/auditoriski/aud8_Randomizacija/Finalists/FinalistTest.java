@@ -1,12 +1,9 @@
-package auditoriski.aud7_Randomizacija.Finalists;
+package auditoriski.aud8_Randomizacija.Finalists;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 class InvalidPickerArgument extends Exception{
 
