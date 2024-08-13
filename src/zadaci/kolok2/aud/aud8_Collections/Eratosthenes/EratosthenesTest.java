@@ -1,4 +1,4 @@
-package kolok2.aud8_Collections.Eratosthenes;
+package kolok2.aud.aud8_Collections.Eratosthenes;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,7 +1,6 @@
-package kolok2.aud.aud9;
+package kolok2.aud.aud9_Set_Map;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
