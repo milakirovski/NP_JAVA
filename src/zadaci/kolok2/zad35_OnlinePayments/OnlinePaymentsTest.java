@@ -90,7 +90,7 @@ class OnlinePayments{
     Map<String,Student> studentsMap;
 
     public OnlinePayments() {
-        this.studentsMap = new HashMap<>()
+        this.studentsMap = new HashMap<>();
     }
 
     public void readItems(InputStream in) {
