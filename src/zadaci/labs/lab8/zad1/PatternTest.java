@@ -17,8 +17,8 @@ class Song {
     @Override
     public String toString() {
         return "Song{" +
-                "title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
+                "title=" + title +
+                ", artist=" + artist +
                 '}';
     }
 }
@@ -42,7 +42,7 @@ class MP3Player implements IMP3 {
 
     public MP3Player(List<Song> songs) {
         this.songs = songs;
-        currSong = songs.getFirst(); // by default
+        currSong = songs.get(0); // by default
     }
 
     @Override
@@ -60,7 +60,7 @@ class MP3Player implements IMP3 {
     public void pressStop() {
         if (hasBeenStopped == 1) {
             System.out.println("Songs are stopped");
-            currSong = songs.getFirst();
+            currSong = songs.get(0);
             hasBeenStopped++;
         } else if (hasBeenStopped > 1) {
             System.out.println("Songs are already stopped");
@@ -78,7 +78,7 @@ class MP3Player implements IMP3 {
         hasBeenStopped = 1;
         isPlaying = 0;
         if (songs.indexOf(currSong) == songs.size() - 1) {
-            currSong = songs.getFirst();
+            currSong = songs.get(0);
         } else {
             currSong = songs.get(songs.indexOf(currSong) + 1);
         }
@@ -90,7 +90,7 @@ class MP3Player implements IMP3 {
         hasBeenStopped = 1;
         isPlaying = 0;
         if (songs.indexOf(currSong) == 0) {
-            currSong = songs.getLast();
+            currSong = songs.get(songs.size() - 1);
         } else {
             currSong = songs.get(songs.indexOf(currSong) - 1);
         }
