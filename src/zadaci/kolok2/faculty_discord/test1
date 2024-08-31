@@ -1,0 +1,51 @@
+Test1
+addInfo DM2 201349 96
+addInfo KI 201566 85
+addInfo OVD 201837 79
+addInfo VVKN 201979 93
+addInfo KI 201039 80
+addInfo OVD 201291 40
+addInfo DM1 201792 41
+addInfo AOK 201935 47
+addInfo KI 201349 97
+addInfo PV 201349 99
+gradeDistribution KI
+
+Test2
+addInfo DM2 201349 96
+addInfo KI 201038 80
+addInfo OVD 201837 79
+addInfo VVKN 201979 93
+addInfo KI 201039 80
+addInfo OVD 201291 40
+addInfo DM1 201792 41
+addInfo AOK 201935 47
+addInfo KI 201349 97
+addInfo PV 201349 99
+printCourseReport KI byGrade false
+
+Test3
+addInfo DM2 201349 96
+addInfo KI 201566 85
+addInfo OVD 201837 79
+addInfo VVKN 201979 93
+addInfo KI 201039 80
+addInfo OVD 201291 40
+addInfo DM1 201792 41
+addInfo AOK 201935 47
+addInfo KI 201349 97
+addInfo PV 201349 99
+printStudentReport 201349
+
+Test4
+addInfo DM2 201349 96
+addInfo KI 201566 85
+addInfo OVD 201037 79
+addInfo VVKN 201979 93
+addInfo KI 201039 80
+addInfo OVD 201291 40
+addInfo DM1 201792 41
+addInfo AOK 201935 47
+addInfo KI 201349 97
+addInfo PV 201349 99
+printCourseReport KI byId true
